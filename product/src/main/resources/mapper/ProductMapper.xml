@@ -8,12 +8,12 @@
         <result column="pname" property="pname" />
         <result column="pprice" property="pprice" />
         <result column="storecount" property="storecount" />
-        <result column="desciption" property="desciption" />
+        <result column="description" property="description" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, pname, pprice, storecount,desciption
+        id, pname, pprice, storecount,description
     </sql>
 
 </mapper>
