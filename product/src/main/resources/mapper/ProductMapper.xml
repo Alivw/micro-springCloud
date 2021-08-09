@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.product.mapper.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.awei.product.entity.Product">
+        <id column="id" property="id" />
+        <result column="pname" property="pname" />
+        <result column="pprice" property="pprice" />
+        <result column="storecount" property="storecount" />
+        <result column="desciption" property="desciption" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pname, pprice, storecount,desciption
+    </sql>
+
+</mapper>
