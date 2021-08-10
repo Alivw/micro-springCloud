@@ -43,6 +43,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
+        System.out.println(projectPath);
         gc.setOutputDir(projectPath + "/order/src/main/java");
         gc.setAuthor("shizuwei");
         gc.setOpen(false);

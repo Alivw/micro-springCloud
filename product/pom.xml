@@ -28,8 +28,14 @@
             <version>5.1.47</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.awei</groupId>
+            <artifactId>order</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
-<!--        <dependency>-->
+        <!--        <dependency>-->
 <!--            <groupId>com.baomidou</groupId>-->
 <!--            <artifactId>mybatis-plus-generator</artifactId>-->
 <!--            <version>3.3.2</version>-->

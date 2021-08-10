@@ -6,12 +6,11 @@ import com.awei.comm.RestBean;
 import com.awei.product.entity.Product;
 import com.awei.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -37,12 +36,42 @@ public class ProductController {
         } else return new RestBean("查询商品失败", Constant.OPEN_FAILURE, null);
     }
 
-    @GetMapping("/{pids}")
-    public RestBean findByid(@PathVariable Integer pids) {
-        Product product = productService.getById(pids);
+    @GetMapping("/{pid}")
+    public RestBean findByid(@PathVariable Integer pid) {
+        Product product = productService.getById(pid);
         if (null != product) {
             return new RestBean("查询商品成功", Constant.OPEN_SUCCESS, product);
         } else return new RestBean("查询商品失败", Constant.OPEN_FAILURE, null);
     }
 
+    @DeleteMapping("/{pid}")
+    public RestBean removeById(@PathVariable Integer pid) {
+        System.out.println("商品获取到：" + pid);
+        return new RestBean("查询商品成功", Constant.OPEN_SUCCESS, pid);
+    }
+
+    @PutMapping("/")
+    public RestBean updateById(Product product) {
+        if (productService.updateById(product)) {
+            return new RestBean("修改商品成功", Constant.OPEN_SUCCESS, product);
+        }
+        return new RestBean("修改商品失败", Constant.OPEN_FAILURE, null);
+    }
+
+    @GetMapping("/cookie")
+    public RestBean cookie(HttpServletRequest request) {
+        // 获取当前容器中所有的cookie
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            System.out.println("cookies:" + cookie.getName() + "  " + cookie.getValue());
+        }
+        //获取所有请求头
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String name = headerNames.nextElement();
+            String value = request.getHeader(name);
+            System.out.println("请求头" + name + "====" + value);
+        }
+        return new RestBean("获取cookie成功", Constant.OPEN_SUCCESS, null);
+    }
 }
