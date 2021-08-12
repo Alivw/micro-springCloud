@@ -1,6 +1,6 @@
 package com.awei.product.mapper;
 
-import com.awei.product.entity.Product;
+import com.awei.comm.product.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

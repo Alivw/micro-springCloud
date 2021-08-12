@@ -1,6 +1,6 @@
 package com.awei.product.service.impl;
 
-import com.awei.product.entity.Product;
+import com.awei.comm.product.entity.Product;
 import com.awei.product.mapper.ProductMapper;
 import com.awei.product.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

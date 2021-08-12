@@ -1,6 +1,6 @@
 package com.awei.order.mapper;
 
-import com.awei.order.entity.Order;
+import com.awei.comm.order.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

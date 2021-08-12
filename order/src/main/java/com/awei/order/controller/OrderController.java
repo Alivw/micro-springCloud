@@ -4,14 +4,14 @@ package com.awei.order.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.awei.comm.Constant;
 import com.awei.comm.RestBean;
-import com.awei.order.entity.Order;
+import com.awei.comm.order.entity.Order;
 import com.awei.order.service.IOrderService;
-import com.awei.product.entity.Product;
-import com.baomidou.mybatisplus.core.toolkit.BeanUtils;
+import com.awei.comm.product.entity.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.omg.CORBA.REBIND;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -36,6 +36,8 @@ public class OrderController {
     private RestTemplate restTemplate;
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     @GetMapping("/")
     public RestBean findAll() {
@@ -60,7 +62,9 @@ public class OrderController {
 
     @GetMapping("/remote/{pid}")
     public RestBean getRemote1(@PathVariable Integer pid) {
-        ResponseEntity<RestBean> exchange = restTemplate.exchange("http://localhost:8080/product/" + pid, HttpMethod.GET, null, RestBean.class);
+        List<ServiceInstance> list = discoveryClient.getInstances("PRODUCT");
+        String url = list.get(0).getUri().toString();
+        ResponseEntity<RestBean> exchange = restTemplate.exchange(url+"/product/" + pid, HttpMethod.GET, null, RestBean.class);
         System.out.println(exchange);
         RestBean body = exchange.getBody();
         return body;

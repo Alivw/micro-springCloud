@@ -3,7 +3,7 @@
 <mapper namespace="com.awei.product.mapper.ProductMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.awei.product.entity.Product">
+    <resultMap id="BaseResultMap" type="com.awei.comm.product.entity.Product">
         <id column="id" property="id" />
         <result column="pname" property="pname" />
         <result column="pprice" property="pprice" />

@@ -6,9 +6,19 @@ spring:
     url: "jdbc:mysql://47.96.76.101:3306/micro_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false"
     username: root
     password: Szw159421
+  application:
+    name: order
 
 
 ## Mybatis SQL 打印(方法接口所在的包，不是Mapper.xml所在的包)
 logging:
   level:
     com.awei.order.mapper: debug
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

@@ -3,7 +3,7 @@ package com.awei.product.controller;
 
 import com.awei.comm.Constant;
 import com.awei.comm.RestBean;
-import com.awei.product.entity.Product;
+import com.awei.comm.product.entity.Product;
 import com.awei.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

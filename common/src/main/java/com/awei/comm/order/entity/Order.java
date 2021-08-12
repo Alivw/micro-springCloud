@@ -1,4 +1,4 @@
-package com.awei.order.entity;
+package com.awei.comm.order.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;

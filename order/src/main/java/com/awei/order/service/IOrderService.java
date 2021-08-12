@@ -1,6 +1,6 @@
 package com.awei.order.service;
 
-import com.awei.order.entity.Order;
+import com.awei.comm.order.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

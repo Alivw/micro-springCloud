@@ -1,6 +1,6 @@
 package com.awei.order.service.impl;
 
-import com.awei.order.entity.Order;
+import com.awei.comm.order.entity.Order;
 import com.awei.order.mapper.OrderMapper;
 import com.awei.order.service.IOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
