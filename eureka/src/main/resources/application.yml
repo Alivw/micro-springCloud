@@ -9,6 +9,6 @@ eureka:
     register-with-eureka: false   #是否将自己注册到eureka中，默认是true，改为false，自己就是eureka
     fetch-registry: false   #是否从eureka中获取注册信息，默认true 单节点
     service-url:
-      deatultZone: http://localhost:9090/eureka
+      deatultZone: http://localhost:9000/eureka/
   instance:
     prefer-ip-address: true   #是否以ip注册到eureka中

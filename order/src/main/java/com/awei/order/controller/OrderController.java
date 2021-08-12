@@ -10,6 +10,7 @@ import com.awei.comm.product.entity.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
@@ -39,6 +40,8 @@ public class OrderController {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Value("${serverUrl}")
+    private String serverUrl;
     @GetMapping("/")
     public RestBean findAll() {
         return new RestBean("查询订单成功", Constant.OPEN_SUCCESS, orderService.list());
@@ -65,6 +68,13 @@ public class OrderController {
         List<ServiceInstance> list = discoveryClient.getInstances("PRODUCT");
         String url = list.get(0).getUri().toString();
         ResponseEntity<RestBean> exchange = restTemplate.exchange(url+"/product/" + pid, HttpMethod.GET, null, RestBean.class);
+        System.out.println(exchange);
+        RestBean body = exchange.getBody();
+        return body;
+    }
+    @GetMapping("/remote1/{pid}")
+    public RestBean getRemote11(@PathVariable Integer pid) {
+        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"product/" + pid, HttpMethod.GET, null, RestBean.class);
         System.out.println(exchange);
         RestBean body = exchange.getBody();
         return body;
