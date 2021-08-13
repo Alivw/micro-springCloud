@@ -26,4 +26,5 @@ serverUrl: http://PRODUCT/
 
 PRODUCT:
   ribbon:
-    NFLoadBanlancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    NFLoadBanlancerRuleClassName: com.awei.order.rule.AweiRule
+#    NFLoadBanlancerRuleClassName: com.netflix.loadbalancer.RandomRule
