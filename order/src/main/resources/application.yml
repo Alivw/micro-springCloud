@@ -23,3 +23,7 @@ eureka:
   instance:
     prefer-ip-address: true
 serverUrl: http://PRODUCT/
+
+PRODUCT:
+  ribbon:
+    NFLoadBanlancerRuleClassName: com.netflix.loadbalancer.RandomRule
