@@ -47,6 +47,12 @@ public class OrderController {
         return new RestBean("查询订单成功", Constant.OPEN_SUCCESS, orderService.list());
     }
 
+
+    @GetMapping("/port/{pid}")
+    public RestBean resTmplateGet4Object(@PathVariable Integer pid) {
+
+    }
+
     @PostMapping("/{pid}/{uname}")
     public RestBean putOrder(@PathVariable Integer pid, @PathVariable String uname) {
         RestBean forObject = restTemplate.getForObject("http://localhost:8080/product/" + pid, RestBean.class);

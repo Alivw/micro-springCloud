@@ -18,8 +18,13 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!-- openfeign 默认支持ribbon-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.awei</groupId>
             <artifactId>common</artifactId>
