@@ -7,8 +7,10 @@ import com.awei.comm.RestBean;
 import com.awei.comm.order.entity.Order;
 import com.awei.order.service.IOrderService;
 import com.awei.comm.product.entity.Product;
+import com.awei.order.service.IproductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.xml.internal.ws.client.SEIPortInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -17,6 +19,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,18 +43,37 @@ public class OrderController {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Resource
+    private IproductService productService;
     @Value("${serverUrl}")
     private String serverUrl;
     @GetMapping("/")
     public RestBean findAll() {
-        return new RestBean("查询订单成功", Constant.OPEN_SUCCESS, orderService.list());
+//        return new RestBean("查询订单成功", Constant.OPEN_SUCCESS, orderService.list());
+        return productService.findAllProducts();
     }
 
+
+    @GetMapping("/{pid}")
+    public RestBean resTmplateGet4Object(@PathVariable Integer pid) {
+        return productService.feignPort(pid);
+    }
 
     @GetMapping("/port/{pid}")
-    public RestBean resTmplateGet4Object(@PathVariable Integer pid) {
-
+    public RestBean getRemote11(@PathVariable Integer pid) {
+        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"product/port/  " + pid, HttpMethod.GET, null, RestBean.class);
+        System.out.println(exchange);
+        RestBean body = exchange.getBody();
+        return body;
     }
+
+//    @GetMapping("/port/{pid}")
+//    public RestBean getRemotePort(@PathVariable Integer pid) {
+//        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"/product/port/" + pid, HttpMethod.GET, null, RestBean.class);
+//        System.out.println(exchange);
+//        RestBean body = exchange.getBody();
+//        return body;
+//    }
 
     @PostMapping("/{pid}/{uname}")
     public RestBean putOrder(@PathVariable Integer pid, @PathVariable String uname) {
@@ -74,13 +96,6 @@ public class OrderController {
         List<ServiceInstance> list = discoveryClient.getInstances("PRODUCT");
         String url = list.get(0).getUri().toString();
         ResponseEntity<RestBean> exchange = restTemplate.exchange(url+"/product/" + pid, HttpMethod.GET, null, RestBean.class);
-        System.out.println(exchange);
-        RestBean body = exchange.getBody();
-        return body;
-    }
-    @GetMapping("/port/{pid}")
-    public RestBean getRemote11(@PathVariable Integer pid) {
-        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"product/port/  " + pid, HttpMethod.GET, null, RestBean.class);
         System.out.println(exchange);
         RestBean body = exchange.getBody();
         return body;
@@ -117,4 +132,6 @@ public class OrderController {
         ResponseEntity<RestBean> exchange = restTemplate.exchange("http://localhost:8080/product/cookie", HttpMethod.GET, entity, RestBean.class);
         return exchange.getBody();
     }
+
+
 }

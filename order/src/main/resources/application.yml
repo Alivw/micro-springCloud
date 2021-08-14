@@ -24,6 +24,10 @@ eureka:
     prefer-ip-address: true
 serverUrl: http://PRODUCT/
 
+PRODUCT:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
 #PRODUCT:
 #  ribbon:
 #    NFLoadBanlancerRuleClassName: com.awei.order.rule.AweiRule
