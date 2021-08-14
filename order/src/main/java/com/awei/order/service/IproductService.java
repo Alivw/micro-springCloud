@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Component
 public interface IproductService {
 
-    @GetMapping("/proudct/{pid}")
+    @GetMapping("/product/{pid}")
     RestBean feignPort(@PathVariable("pid") Integer pid);
+
     @GetMapping("/product/")
     RestBean findAllProducts();
 }
