@@ -47,6 +47,12 @@ public class OrderController {
         return new RestBean("查询订单成功", Constant.OPEN_SUCCESS, orderService.list());
     }
 
+
+    @GetMapping("/port/{pid}")
+    public RestBean resTmplateGet4Object(@PathVariable Integer pid) {
+
+    }
+
     @PostMapping("/{pid}/{uname}")
     public RestBean putOrder(@PathVariable Integer pid, @PathVariable String uname) {
         RestBean forObject = restTemplate.getForObject("http://localhost:8080/product/" + pid, RestBean.class);
@@ -72,9 +78,9 @@ public class OrderController {
         RestBean body = exchange.getBody();
         return body;
     }
-    @GetMapping("/remote1/{pid}")
+    @GetMapping("/port/{pid}")
     public RestBean getRemote11(@PathVariable Integer pid) {
-        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"product/" + pid, HttpMethod.GET, null, RestBean.class);
+        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"product/port/  " + pid, HttpMethod.GET, null, RestBean.class);
         System.out.println(exchange);
         RestBean body = exchange.getBody();
         return body;

@@ -44,6 +44,14 @@ public class ProductController {
         } else return new RestBean("查询商品失败", Constant.OPEN_FAILURE, null);
     }
 
+    @GetMapping("/port/{pid}")
+    public RestBean findPortByid(@PathVariable Integer pid, HttpServletRequest request) {
+        int port = request.getServerPort();
+        Product product = productService.getById(pid);
+        if (null != product) {
+            return new RestBean("查询商品成功", Constant.OPEN_SUCCESS, port);
+        } else return new RestBean("查询商品失败", Constant.OPEN_FAILURE, null);
+    }
     @DeleteMapping("/{pid}")
     public RestBean removeById(@PathVariable Integer pid) {
         System.out.println("商品获取到：" + pid);
