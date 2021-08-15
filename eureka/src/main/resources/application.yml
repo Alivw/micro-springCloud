@@ -13,7 +13,8 @@ eureka:
     register-with-eureka: true   #是否将自己注册到eureka中，默认是true，改为false，自己就是eureka
     fetch-registry: true   #是否从eureka中获取注册信息，默认true 单节点
     service-url:
-      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/
+#      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/
+      defaultZone: http://localhost:9000/eureka/
   instance:
     prefer-ip-address: true   #是否以ip注册到eureka中
 

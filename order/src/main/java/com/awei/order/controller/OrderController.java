@@ -55,13 +55,11 @@ public class OrderController {
 
 
     @GetMapping("/{pid}")
-    @HystrixCommand(fallbackMethod = "fbkResTmplateGet4Object")
     public RestBean resTmplateGet4Object(@PathVariable Integer pid) {
         return productService.feignPort(pid);
     }
-    public RestBean fbkResTmplateGet4Object(@PathVariable Integer pid) {
-        return new RestBean("给你个果盘", Constant.OPEN_SUCCESS, pid);
-    }
+
+
 
     @GetMapping("/port/{pid}")
     public RestBean getRemote11(@PathVariable Integer pid) {
@@ -71,13 +69,17 @@ public class OrderController {
         return body;
     }
 
-//    @GetMapping("/port/{pid}")
-//    public RestBean getRemotePort(@PathVariable Integer pid) {
-//        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"/product/port/" + pid, HttpMethod.GET, null, RestBean.class);
-//        System.out.println(exchange);
-//        RestBean body = exchange.getBody();
-//        return body;
-//    }
+    @GetMapping("/restemplate/{pid}")
+    @HystrixCommand(fallbackMethod = "restemplatePidFallback")
+    public RestBean restemplatePid(@PathVariable Integer pid) {
+        ResponseEntity<RestBean> exchange = restTemplate.exchange(serverUrl+"/product/" + pid, HttpMethod.GET, null, RestBean.class);
+        System.out.println(exchange);
+        RestBean body = exchange.getBody();
+        return body;
+    }
+    public RestBean restemplatePidFallback(@PathVariable Integer pid) {
+        return new RestBean("给你个果盘", Constant.OPEN_SUCCESS, pid);
+    }
 
     @PostMapping("/{pid}/{uname}")
     public RestBean putOrder(@PathVariable Integer pid, @PathVariable String uname) {
