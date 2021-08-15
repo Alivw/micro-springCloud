@@ -38,6 +38,7 @@ public class ProductController {
 
     @GetMapping("/{pid}")
     public RestBean findByid(@PathVariable Integer pid) {
+        int i = pid / pid;
         Product product = productService.getById(pid);
         if (null != product) {
             return new RestBean("查询商品成功", Constant.OPEN_SUCCESS, product);

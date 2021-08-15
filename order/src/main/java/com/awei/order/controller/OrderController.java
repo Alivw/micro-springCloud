@@ -5,16 +5,17 @@ import cn.hutool.core.bean.BeanUtil;
 import com.awei.comm.Constant;
 import com.awei.comm.RestBean;
 import com.awei.comm.order.entity.Order;
-import com.awei.order.service.IOrderService;
 import com.awei.comm.product.entity.Product;
+import com.awei.order.service.IOrderService;
 import com.awei.order.service.IproductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.internal.ws.client.SEIPortInfo;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -55,8 +56,12 @@ public class OrderController {
 
 
     @GetMapping("/{pid}")
+    @HystrixCommand(fallbackMethod = "fbkResTmplateGet4Object")
     public RestBean resTmplateGet4Object(@PathVariable Integer pid) {
         return productService.feignPort(pid);
+    }
+    public RestBean fbkResTmplateGet4Object(@PathVariable Integer pid) {
+        return new RestBean("给你个果盘", Constant.OPEN_SUCCESS, pid);
     }
 
     @GetMapping("/port/{pid}")
