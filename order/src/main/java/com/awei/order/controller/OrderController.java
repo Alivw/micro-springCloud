@@ -7,7 +7,7 @@ import com.awei.comm.RestBean;
 import com.awei.comm.order.entity.Order;
 import com.awei.comm.product.entity.Product;
 import com.awei.order.service.IOrderService;
-import com.awei.order.service.IproductService;
+import com.awei.order.service.IProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -45,7 +44,7 @@ public class OrderController {
     private DiscoveryClient discoveryClient;
 
     @Resource
-    private IproductService productService;
+    private IProductService productService;
     @Value("${serverUrl}")
     private String serverUrl;
     @GetMapping("/")

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  **/
 @FeignClient("PRODUCT")
 @Component
-public interface IproductService {
+public interface IProductService {
 
     @GetMapping("/product/{pid}")
     RestBean feignPort(@PathVariable("pid") Integer pid);
