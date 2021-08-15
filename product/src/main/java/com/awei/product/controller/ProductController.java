@@ -37,12 +37,14 @@ public class ProductController {
     }
 
     @GetMapping("/{pid}")
-    public RestBean findByid(@PathVariable Integer pid) {
-        int i = pid / pid;
-        Product product = productService.getById(pid);
-        if (null != product) {
-            return new RestBean("查询商品成功", Constant.OPEN_SUCCESS, product);
-        } else return new RestBean("查询商品失败", Constant.OPEN_FAILURE, null);
+    public RestBean findByid(@PathVariable Integer pid) throws InterruptedException {
+        System.out.println("进入提供者");
+        Thread.sleep(pid * 1000);
+//        Product product = productService.getById(pid);
+//        if (null != product) {
+//            return new RestBean("查询商品成功", Constant.OPEN_SUCCESS, product);
+//        } else return new RestBean("查询商品失败", Constant.OPEN_FAILURE, null);
+        return new RestBean("商品查询成功", Constant.OPEN_SUCCESS, pid);
     }
 
     @GetMapping("/port/{pid}")
