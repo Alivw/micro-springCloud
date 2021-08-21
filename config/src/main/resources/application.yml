@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: micro
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/devAwei/cloudconfig
+server:
+  port: 10001
